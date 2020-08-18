@@ -9,6 +9,11 @@ namespace ScooterRental
     public class ScooterService : IScooterService
     {
         private IList<Scooter> ScooterList;
+
+        public ScooterService()
+        {
+            ScooterList =new List<Scooter>();
+        }
         public void AddScooter(string id, decimal pricePerMinute)
         {
             throw new NotImplementedException();
