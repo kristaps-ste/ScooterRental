@@ -37,6 +37,15 @@ namespace ScooterRentalTests
             Assert.True(RentalInstance.ScooterService.GetScooterById(testId).IsRented);
         }
        
+        [Fact]
+        public void StartRent_ShouldThrowExceptionIfOccupied()
+        {
+            string testId = "1";
+            
+            RentalInstance.ScooterService.AddScooter(testId,0.5m);
+            RentalInstance.StartRent(testId);
+            Assert.Throws<ArgumentException>(() => RentalInstance.StartRent(testId));
+        }
 
     }
 }

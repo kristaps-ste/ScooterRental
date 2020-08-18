@@ -17,8 +17,14 @@ namespace ScooterRental
         }
         public void StartRent(string id)
         {
-            ScooterService.GetScooterById(id).IsRented=true;
-            
+            if (ScooterService.GetScooterById(id).IsRented == true)
+            {
+                throw new ArgumentException($"Scooter with id {id} is occupied already","id");
+            }
+            else
+            {
+                ScooterService.GetScooterById(id).IsRented=true; 
+            }
         }
 
         public decimal EndRent(string id)
