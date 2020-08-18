@@ -23,7 +23,9 @@ namespace ScooterRental
             }
             else
             {
-                ScooterService.GetScooterById(id).IsRented=true; 
+                var scooter=ScooterService.GetScooterById(id);
+                scooter.IsRented=true; 
+                scooter.RentedAt=DateTime.UtcNow;
             }
         }
 

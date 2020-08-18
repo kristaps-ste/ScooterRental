@@ -47,5 +47,17 @@ namespace ScooterRentalTests
             Assert.Throws<ArgumentException>(() => RentalInstance.StartRent(testId));
         }
 
+        [Fact]
+        public void StartRent_ShouldSaveDateTimeWhenRentStarted()
+        {
+            string testId = "1";
+            
+            RentalInstance.ScooterService.AddScooter(testId,0.5m);
+            RentalInstance.StartRent(testId);
+            var dateStarted = RentalInstance.ScooterService.GetScooterById(testId).RentedAt;
+           
+            Assert.InRange(dateStarted,DateTime.UtcNow.AddMinutes(-1), DateTime.UtcNow);
+        }
+
     }
 }
