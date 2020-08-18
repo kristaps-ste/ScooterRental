@@ -21,6 +21,11 @@ namespace ScooterRentalTests
             Assert.Equal(ExpectedName, RentalInstance.Name);
         }
 
+        [Fact]
+        public void RentalCompanyScooterServiceSholudBeInitialized()
+        {
+            Assert.NotNull(RentalInstance.ScooterService);
+        }
        
 
     }

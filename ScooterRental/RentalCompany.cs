@@ -9,9 +9,11 @@ namespace ScooterRental
     public class RentalCompany :IRentalCompany
     {
         public string Name { get; }
+        public IScooterService ScooterService { get; }
         public RentalCompany(string name)
         {
             Name = name;
+            ScooterService= new ScooterService();
         }
         public void StartRent(string id)
         {
