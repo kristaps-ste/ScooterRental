@@ -1,9 +1,4 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScooterRental
 {
@@ -20,16 +15,14 @@ namespace ScooterRental
         }
         public void StartRent(string id)
         {
-            if (ScooterService.GetScooterById(id).IsRented == true)
+            if (ScooterService.GetScooterById(id).IsRented)
             {
                 throw new ArgumentException($"Scooter with id {id} is occupied already","id");
             }
-            else
-            {
-                var scooter=ScooterService.GetScooterById(id);
-                scooter.IsRented=true; 
-                scooter.RentedAt=DateTime.UtcNow;
-            }
+
+            var scooter=ScooterService.GetScooterById(id);
+            scooter.IsRented=true; 
+            scooter.RentedAt=DateTime.UtcNow;
         }
 
         public decimal EndRent(string id)
@@ -43,7 +36,6 @@ namespace ScooterRental
         }
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
-            
             decimal income = FinancialRecords.CalculateIncome(year);
             if (includeNotCompletedRentals)
             {
@@ -53,10 +45,7 @@ namespace ScooterRental
                     income += FinancialRecords.CalculateCharge(scooter.PricePerMinute, DateTime.UtcNow - scooter.RentedAt);
                 }
             }
-
             return income;
         }
-
-        
     }
 }

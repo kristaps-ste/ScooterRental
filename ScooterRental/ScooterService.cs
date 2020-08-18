@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ScooterRental
 {
     public class ScooterService : IScooterService
     {
-        private IList<Scooter> ScooterList;
+        private IList<Scooter> ScooterList { get; set; }
 
         public ScooterService()
         {
@@ -20,23 +18,19 @@ namespace ScooterRental
             {
                 throw new  ArgumentException($"Scooter with id: {id} already exists in list.","id");
             }
-            else
-            {
-                ScooterList.Add(new Scooter(id,pricePerMinute));  
-            }
-            
+
+            ScooterList.Add(new Scooter(id,pricePerMinute));
+
         }
 
         public void RemoveScooter(string id)
         {
             if (!IsScooterExistInList(id))
             {
-                throw new  ArgumentException($"Scooter with id: {id} does not exist.","scooterId");
+                throw new  ArgumentException($"Scooter with id: {id} does not exist.","id");
             }
-            else
-            {
-                ScooterList = ScooterList.Where(it => it.Id != id).ToList();
-            }
+
+            ScooterList = ScooterList.Where(it => it.Id != id).ToList();
         }
 
         public IList<Scooter> GetScooters()
@@ -46,7 +40,7 @@ namespace ScooterRental
 
         public IList<Scooter> GetScootersInUse()
         {
-            return ScooterList.Where(it=>it.IsRented==true).ToList();
+            return ScooterList.Where(it=>it.IsRented).ToList();
         }
         public Scooter GetScooterById(string scooterId)
         {
@@ -54,15 +48,12 @@ namespace ScooterRental
             {
                 throw new  ArgumentException($"Scooter with id: {scooterId} does not exist.","scooterId");
             }
-            else
-            {
-                return ScooterList.First(it => it.Id == scooterId);  
-            }
+
+            return ScooterList.First(it => it.Id == scooterId);
         }
         private bool IsScooterExistInList(string id)
         {
             return ScooterList.Any(it => it.Id == id);
         }
-        
     }
 }
