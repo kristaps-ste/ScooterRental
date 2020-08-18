@@ -26,6 +26,16 @@ namespace ScooterRentalTests
         {
             Assert.NotNull(RentalInstance.ScooterService);
         }
+
+        [Fact]
+        public void StartRent_ShouldMarkRentedScooterAsRented()
+        {
+            string testId = "1";
+            
+            RentalInstance.ScooterService.AddScooter(testId,0.5m);
+            RentalInstance.StartRent(testId);
+            Assert.True(RentalInstance.ScooterService.GetScooterById(testId).IsRented);
+        }
        
 
     }

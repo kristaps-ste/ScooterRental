@@ -65,13 +65,5 @@ namespace ScooterRentalTests
             Assert.Throws<ArgumentException>(() => ScooterServiceInstance.RemoveScooter(testId));
         }
 
-        [Fact] 
-        public void RemoveScooter_ShouldThrowExceptionWhenIdDoesNotExist()
-        {
-
-        }
-
-
-
     }
 }

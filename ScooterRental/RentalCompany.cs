@@ -17,7 +17,8 @@ namespace ScooterRental
         }
         public void StartRent(string id)
         {
-            throw new NotImplementedException();
+            ScooterService.GetScooterById(id).IsRented=true;
+            
         }
 
         public decimal EndRent(string id)
