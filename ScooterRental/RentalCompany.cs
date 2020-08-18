@@ -9,6 +9,11 @@ namespace ScooterRental
     public class RentalCompany :IRentalCompany
     {
         public string Name { get; }
+
+        public RentalCompany(string name)
+        {
+            Name = name;
+        }
         public void StartRent(string id)
         {
             throw new NotImplementedException();

@@ -12,7 +12,7 @@ namespace ScooterRentalTests
         {
             var expectedName="DemoCompany";
             
-            var rentalInstance= new RentalCompany();
+            var rentalInstance= new RentalCompany(expectedName);
 
             Assert.Equal(expectedName,rentalInstance.Name);
         }
