@@ -16,9 +16,10 @@ namespace ScooterRental
         }
         public void AddScooter(string id, decimal pricePerMinute)
         {
-            if (ScooterList.Any(it => it.Id == id))
+            if (IsScooterExistInList(id))
             {
                 throw new  ArgumentException($"Scooter with id: {id} already exists in list.","id");
+                return;
             }
             ScooterList.Add(new Scooter(id,pricePerMinute));
         }
@@ -35,7 +36,18 @@ namespace ScooterRental
 
         public Scooter GetScooterById(string scooterId)
         {
-            throw new NotImplementedException();
+            if (!IsScooterExistInList(scooterId))
+            {
+                throw new  ArgumentException($"Scooter with id: {scooterId} already exists in list.","scooterId");
+            }
+
+            return ScooterList.First(it => it.Id == scooterId);
         }
+
+        private bool IsScooterExistInList(string id)
+        {
+            return ScooterList.Any(it => it.Id == id);
+        }
+        
     }
 }
