@@ -31,7 +31,9 @@ namespace ScooterRental
 
         public decimal EndRent(string id)
         {
-            throw new NotImplementedException();
+            var scooter=ScooterService.GetScooterById(id);
+            scooter.IsRented = false;
+            return -1m;
         }
 
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)

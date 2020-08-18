@@ -56,7 +56,19 @@ namespace ScooterRentalTests
             RentalInstance.StartRent(testId);
             var dateStarted = RentalInstance.ScooterService.GetScooterById(testId).RentedAt;
            
-            Assert.InRange(dateStarted,DateTime.UtcNow.AddMinutes(-1), DateTime.UtcNow);
+            Assert.InRange(dateStarted,DateTime.UtcNow.AddMinutes(-0.1), DateTime.UtcNow);
+        }
+
+        [Fact]
+        public void EndRent_ShouldStopRentByScooterId()
+        {
+            string testId = "1";
+
+            RentalInstance.ScooterService.AddScooter(testId,0.5m);
+            RentalInstance.StartRent(testId);
+            RentalInstance.EndRent(testId);
+
+            Assert.False(RentalInstance.ScooterService.GetScooterById(testId).IsRented);
         }
 
     }
