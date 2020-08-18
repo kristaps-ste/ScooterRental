@@ -55,11 +55,14 @@ namespace ScooterRentalTests
             Assert.Throws<ArgumentException>(() => ScooterServiceInstance.GetScooterById(testId));
         }
         [Fact]
-        public void RemoveScooter_ShouldRemoveCorrectScooterFromListById()
+        public void RemoveScooter_ShouldRemoveCorrectScooterFromListByIdOrThrowException()
         {
+            string testId = "2";
             ScooterServiceInstance.AddScooter("1",0.5m);
-            ScooterServiceInstance.AddScooter("2",0.5m);
-            ScooterServiceInstance.RemoveScooter("2");
+            ScooterServiceInstance.AddScooter(testId,0.5m);
+            ScooterServiceInstance.RemoveScooter(testId);
+
+            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.RemoveScooter(testId));
         }
 
         [Fact] 
