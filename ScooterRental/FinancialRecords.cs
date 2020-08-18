@@ -5,7 +5,12 @@ namespace ScooterRental
 {
     public class FinancialRecords
     {
-        private IList<FinancialRecord> FinancialRecordRegister { get; }
+        public IList<FinancialRecord> FinancialRecordRegister { get; }
+
+        public FinancialRecords()
+        {
+            FinancialRecordRegister=new List<FinancialRecord>();
+        }
         public static decimal CalculateCharge(decimal rate, TimeSpan period)
         {
             decimal perDayMaxCharge = 20m;

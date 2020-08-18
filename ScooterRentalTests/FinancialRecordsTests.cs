@@ -17,5 +17,13 @@ namespace ScooterRentalTests
                Assert.NotNull(prop.GetValue(record));
             }
         }
+
+        [Fact]
+
+        public void FinancialRecordsRegisterShouldBeInitialized()
+        {
+            var financialRecordsInstance= new FinancialRecords();
+            Assert.NotNull(financialRecordsInstance.FinancialRecordRegister);
+        }
     }
 }
