@@ -10,10 +10,12 @@ namespace ScooterRental
     {
         public string Name { get; }
         public IScooterService ScooterService { get; }
+        private FinancialRecords FinancialRecords { get; }
         public RentalCompany(string name)
         {
             Name = name;
             ScooterService= new ScooterService();
+            FinancialRecords = new FinancialRecords();
         }
         public void StartRent(string id)
         {
@@ -34,7 +36,8 @@ namespace ScooterRental
             var endRentAt = DateTime.UtcNow;
             var scooter=ScooterService.GetScooterById(id);
             scooter.IsRented = false;
-            return FinancialRecords.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
+            var toPay= FinancialRecords.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
+            return toPay;
         }
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
