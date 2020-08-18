@@ -1,4 +1,5 @@
 using System;
+using FluentAssertions;
 using ScooterRental;
 using Xunit;
 using ScooterRentalTests;
@@ -7,14 +8,20 @@ namespace ScooterRentalTests
 {
     public class RentalCompanyTests
     {
+        private string ExpectedName="DemoCompany";
+        private RentalCompany RentalInstance;
+
+        public RentalCompanyTests()
+        {
+            RentalInstance = new RentalCompany(ExpectedName);
+        }
         [Fact]
         public void RentalCompanyInstanceInitializationWithCorrectName()
         {
-            var expectedName="DemoCompany";
-            
-            var rentalInstance= new RentalCompany(expectedName);
-
-            Assert.Equal(expectedName,rentalInstance.Name);
+            Assert.Equal(ExpectedName, RentalInstance.Name);
         }
+
+       
+
     }
 }
