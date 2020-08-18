@@ -65,5 +65,17 @@ namespace ScooterRentalTests
             Assert.Throws<ArgumentException>(() => ScooterServiceInstance.RemoveScooter(testId));
         }
 
+        [Fact]
+        public void GetScooters_ShouldReturnUnrentedScooters()
+        {
+            int expectedValue = 1;
+
+            ScooterServiceInstance.AddScooter("1",0.5m);
+            ScooterServiceInstance.AddScooter("2",0.5m);
+            ScooterServiceInstance.GetScooterById("2").IsRented = true;
+            
+            Assert.Equal(expectedValue, ScooterServiceInstance.GetScooters().Count);
+        }
+
     }
 }

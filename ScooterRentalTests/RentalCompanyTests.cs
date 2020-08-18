@@ -78,6 +78,7 @@ namespace ScooterRentalTests
         [InlineData(1,21,20)]
         [InlineData(1,1442,22)]
         [InlineData(0.01,1440,14.4)]
+        [InlineData(0.01,2880,28.8)]
         [InlineData(0.01,2881,28.81)]
         public void EndRent_ShouldReturnCorrectToPayAccordingToRules(decimal price,double minutes, decimal expectedCharge )
         {
