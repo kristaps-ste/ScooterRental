@@ -32,7 +32,7 @@ namespace ScooterRental
         public bool IsRented { get; set; }
 
         /// <summary>
-        /// Save time when rent started for charge calculation later.
+        /// Save time when rent started for charge later calculation.
         /// </summary>
         public DateTime RentedAt { get; set; }
     }

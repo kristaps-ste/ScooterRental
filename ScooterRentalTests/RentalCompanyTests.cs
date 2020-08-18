@@ -71,5 +71,23 @@ namespace ScooterRentalTests
             Assert.False(RentalInstance.ScooterService.GetScooterById(testId).IsRented);
         }
 
+        [Theory]
+        
+        [InlineData(1,1,1)]
+        [InlineData(0.5,0.5,0.5)]
+        public void EndRent_ShouldReturnCorrectToPayAccordingToRules(decimal price,double minutes, decimal expectedCharge )
+        {
+            string testId = "1";
+
+            var testDateStarted = DateTime.UtcNow.AddMinutes(-minutes);
+            
+            RentalInstance.ScooterService.AddScooter(testId,price);
+            RentalInstance.StartRent(testId);
+            RentalInstance.ScooterService.GetScooterById(testId).RentedAt = testDateStarted;
+
+            var charge= RentalInstance.EndRent(testId);
+
+            Assert.Equal(expectedCharge,charge);
+        }
     }
 }

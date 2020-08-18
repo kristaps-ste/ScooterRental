@@ -31,14 +31,21 @@ namespace ScooterRental
 
         public decimal EndRent(string id)
         {
+            var endRentAt = DateTime.UtcNow;
             var scooter=ScooterService.GetScooterById(id);
             scooter.IsRented = false;
-            return -1m;
+            return CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
         }
 
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
             throw new NotImplementedException();
+        }
+
+        private decimal CalculateCharge(decimal rate ,TimeSpan period)
+        {
+            var charge = rate * (decimal) Math.Round(period.TotalMinutes);
+            return charge ;
         }
     }
 }
