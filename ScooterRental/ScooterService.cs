@@ -41,7 +41,7 @@ namespace ScooterRental
 
         public IList<Scooter> GetScooters()
         {
-            return ScooterList;
+            return ScooterList.Where(it=>it.IsRented==false).ToList();
         }
 
         public Scooter GetScooterById(string scooterId)
