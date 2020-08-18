@@ -94,5 +94,17 @@ namespace ScooterRentalTests
 
             Assert.Equal(expectedCharge,charge);
         }
+
+        [Theory]
+        [InlineData(null,true,0)]
+        public void CalculateIncome_ShouldCalculateTotalIncomeAccordingToParameters(int? year, bool includeRunning, decimal expected)
+        {
+           if (year == null)
+            {
+                year = 0;
+            }
+
+            Assert.Equal(expected,RentalInstance.CalculateIncome(year,includeRunning));
+        }
     }
 }

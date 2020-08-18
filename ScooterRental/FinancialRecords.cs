@@ -18,10 +18,10 @@ namespace ScooterRental
             FinancialRecordRegister.Add(record);
         }
 
-        public decimal CalculateIncome(int year)
+        public decimal CalculateIncome(int? year)
         {
 
-            if (year == 0)
+            if (year == null || year == 0)
             {
                 return FinancialRecordRegister.Sum(it => it.MoneyCharged);
             }

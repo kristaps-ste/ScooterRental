@@ -44,6 +44,10 @@ namespace ScooterRental
             return ScooterList.Where(it=>it.IsRented==false).ToList();
         }
 
+        public IList<Scooter> GetScootersInUse()
+        {
+            return ScooterList.Where(it=>it.IsRented==true).ToList();
+        }
         public Scooter GetScooterById(string scooterId)
         {
             if (!IsScooterExistInList(scooterId))
@@ -55,7 +59,6 @@ namespace ScooterRental
                 return ScooterList.First(it => it.Id == scooterId);  
             }
         }
-
         private bool IsScooterExistInList(string id)
         {
             return ScooterList.Any(it => it.Id == id);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ScooterRental
     public class RentalCompany :IRentalCompany
     {
         public string Name { get; }
-        public IScooterService ScooterService { get; }
+        public ScooterService ScooterService { get; }
         private FinancialRecords FinancialRecords { get; }
         public RentalCompany(string name)
         {
@@ -42,7 +43,18 @@ namespace ScooterRental
         }
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
-            throw new NotImplementedException();
+            
+            decimal income = FinancialRecords.CalculateIncome(year);
+            if (includeNotCompletedRentals)
+            {
+                var scootersInUse = ScooterService.GetScootersInUse();
+                foreach (var scooter in scootersInUse)
+                {
+                    income += FinancialRecords.CalculateCharge(scooter.PricePerMinute, DateTime.UtcNow - scooter.RentedAt);
+                }
+            }
+
+            return income;
         }
 
         
