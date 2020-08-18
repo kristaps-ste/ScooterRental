@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScooterRental
 {
@@ -20,7 +21,12 @@ namespace ScooterRental
         public decimal CalculateIncome(int year)
         {
 
-            return -1;
+            if (year == 0)
+            {
+                return FinancialRecordRegister.Sum(it => it.MoneyCharged);
+            }
+
+            return FinancialRecordRegister.Where(it => it.DateTime.Year == year).Sum(it => it.MoneyCharged);
         }
         public static decimal CalculateCharge(decimal rate, TimeSpan period)
         {

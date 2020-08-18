@@ -43,9 +43,16 @@ namespace ScooterRentalTests
         }
 
         [Theory]
-        [InlineData(0,0)]
-        public void CalculateIncome_ShouldSumAllIncomeByGivenYear(int year, decimal expected)
+        [InlineData(0,13)]
+        [InlineData(2000,7)]
+        [InlineData(2020,0)]
+        [InlineData(2005,6)]
+       public void CalculateIncome_ShouldSumAllIncomeByGivenYear(int year, decimal expected)
         {
+            
+            FinancialRecordsInstance.AddRecord(new FinancialRecord("1", new DateTime(2000,1,1),1));
+            FinancialRecordsInstance.AddRecord(new FinancialRecord("2", new DateTime(2000,6,1),6));
+            FinancialRecordsInstance.AddRecord(new FinancialRecord("1", new DateTime(2005,1,1),6));
             Assert.Equal(expected,FinancialRecordsInstance.CalculateIncome(year));
         }
 
