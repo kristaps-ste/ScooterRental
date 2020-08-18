@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScooterRental
 {
-    class RentalCompany :IRentalCompany
+    public class RentalCompany :IRentalCompany
     {
         public string Name { get; }
         public void StartRent(string id)
