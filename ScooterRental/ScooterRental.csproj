@@ -59,6 +59,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FinancialRecord.cs" />
+    <Compile Include="FinancialRecords.cs" />
     <Compile Include="IRentalCompany.cs" />
     <Compile Include="IScooterService.cs" />
     <Compile Include="Program.cs" />
