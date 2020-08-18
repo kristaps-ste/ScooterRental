@@ -16,6 +16,12 @@ namespace ScooterRental
         {
             FinancialRecordRegister.Add(record);
         }
+
+        public decimal CalculateIncome(int year)
+        {
+
+            return -1;
+        }
         public static decimal CalculateCharge(decimal rate, TimeSpan period)
         {
             decimal perDayMaxCharge = 20m;

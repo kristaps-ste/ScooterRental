@@ -37,6 +37,7 @@ namespace ScooterRental
             var scooter=ScooterService.GetScooterById(id);
             scooter.IsRented = false;
             var toPay= FinancialRecords.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
+            FinancialRecords.FinancialRecordRegister.Add(new FinancialRecord(id,endRentAt,toPay));
             return toPay;
         }
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)

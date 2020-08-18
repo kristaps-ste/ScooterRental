@@ -42,5 +42,13 @@ namespace ScooterRentalTests
             Assert.Equal(expected,FinancialRecordsInstance.FinancialRecordRegister.Count);
         }
 
+        [Theory]
+        [InlineData(0,0)]
+        public void CalculateIncome_ShouldSumAllIncomeByGivenYear(int year, decimal expected)
+        {
+            Assert.Equal(expected,FinancialRecordsInstance.CalculateIncome(year));
+        }
+
+
     }
 }
