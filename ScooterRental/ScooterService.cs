@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace ScooterRental
 {
-    class ScooterService : IScooterService
+    public class ScooterService : IScooterService
     {
+        private IList<Scooter> ScooterList;
         public void AddScooter(string id, decimal pricePerMinute)
         {
             throw new NotImplementedException();
@@ -20,7 +21,7 @@ namespace ScooterRental
 
         public IList<Scooter> GetScooters()
         {
-            throw new NotImplementedException();
+            return ScooterList;
         }
 
         public Scooter GetScooterById(string scooterId)
