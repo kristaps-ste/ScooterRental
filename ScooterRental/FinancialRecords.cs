@@ -11,6 +11,11 @@ namespace ScooterRental
         {
             FinancialRecordRegister=new List<FinancialRecord>();
         }
+
+        public void AddRecord(FinancialRecord record)
+        {
+            FinancialRecordRegister.Add(record);
+        }
         public static decimal CalculateCharge(decimal rate, TimeSpan period)
         {
             decimal perDayMaxCharge = 20m;

@@ -7,6 +7,13 @@ namespace ScooterRentalTests
 {
     public class FinancialRecordsTests
     {
+        private FinancialRecords FinancialRecordsInstance { get; set; }
+
+        public FinancialRecordsTests()
+        {
+            FinancialRecordsInstance=new FinancialRecords();
+        }
+
         [Fact]
         public void FinancialRecord_ShouldBeInitialized()
         {
@@ -25,5 +32,15 @@ namespace ScooterRentalTests
             var financialRecordsInstance= new FinancialRecords();
             Assert.NotNull(financialRecordsInstance.FinancialRecordRegister);
         }
+
+        [Fact]
+        public void AddRecord_ShouldBeAbleToAddNewRecordToRegister()
+        {
+            int expected = 1;
+            FinancialRecordsInstance.AddRecord(new FinancialRecord("1", new DateTime(),0));
+
+            Assert.Equal(expected,FinancialRecordsInstance.FinancialRecordRegister.Count);
+        }
+
     }
 }
