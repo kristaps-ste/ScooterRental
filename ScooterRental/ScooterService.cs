@@ -12,11 +12,15 @@ namespace ScooterRental
 
         public ScooterService()
         {
-            ScooterList =new List<Scooter>();
+            ScooterList=new List<Scooter>();
         }
         public void AddScooter(string id, decimal pricePerMinute)
         {
-            throw new NotImplementedException();
+            if (ScooterList.Any(it => it.Id == id))
+            {
+                throw new  ArgumentException($"Scooter with id: {id} already exists in list.","id");
+            }
+            ScooterList.Add(new Scooter(id,pricePerMinute));
         }
 
         public void RemoveScooter(string id)
