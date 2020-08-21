@@ -14,6 +14,11 @@ namespace ScooterRental
         {
             ScooterList=new List<Scooter>();
         }
+
+        public ScooterService(IList<Scooter> scooterList)
+        {
+            ScooterList = scooterList;
+        }
         public void AddScooter(string id, decimal pricePerMinute)
         {
             if (IsScooterExistInList(id))

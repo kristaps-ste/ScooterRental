@@ -5,11 +5,11 @@ using Xunit;
 using ScooterRental;
 namespace ScooterRentalTests
 {
-    public class FinancialRecordsTests
+    public class FinancesTests
     {
         private FinancialRecords FinancialRecordsInstance { get; set; }
 
-        public FinancialRecordsTests()
+        public FinancesTests()
         {
             FinancialRecordsInstance=new FinancialRecords();
         }

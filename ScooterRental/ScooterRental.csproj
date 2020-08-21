@@ -65,9 +65,12 @@
     <Compile Include="Exceptions\DuplicateScooterIdException.cs" />
     <Compile Include="Exceptions\InvalidScooterIdException.cs" />
     <Compile Include="Exceptions\OccupiedScooterException.cs" />
-    <Compile Include="FinancialRecord.cs" />
-    <Compile Include="FinancialRecords.cs" />
-    <Compile Include="IFinancialRecords.cs" />
+    <Compile Include="Exceptions\UnOccupiedScooterEndRentException.cs" />
+    <Compile Include="Finances\ChargeCalculator.cs" />
+    <Compile Include="Finances\FinancialRecord.cs" />
+    <Compile Include="Finances\FinancialRecords.cs" />
+    <Compile Include="Finances\IChargeCalculator.cs" />
+    <Compile Include="Finances\IFinancialRecords.cs" />
     <Compile Include="IRentalCompany.cs" />
     <Compile Include="IScooterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

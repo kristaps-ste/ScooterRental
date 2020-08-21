@@ -6,13 +6,16 @@ namespace ScooterRental
     public class RentalCompany :IRentalCompany
     {
         public string Name { get; }
-        public ScooterService ScooterService { get; }
-        private FinancialRecords FinancialRecords { get; }
-        public RentalCompany(string name)
+        private IScooterService ScooterService { get; }
+        private IFinancialRecords FinancialRecords { get; }
+        private IChargeCalculator ChargeCalculator { get; }
+
+        public RentalCompany(string name, IScooterService scooterService, IFinancialRecords finRecords, IChargeCalculator chargeClc)
         {
             Name = name;
-            ScooterService= new ScooterService();
-            FinancialRecords = new FinancialRecords();
+            ScooterService = scooterService;
+            FinancialRecords = finRecords;
+            ChargeCalculator = chargeClc;
         }
         public void StartRent(string id)
         {
@@ -28,9 +31,14 @@ namespace ScooterRental
         public decimal EndRent(string id)
         {
             var endRentAt = DateTime.UtcNow;
-            var scooter=ScooterService.GetScooterById(id);
+
+            var scooter = ScooterService.GetScooterById(id);
+            if (scooter.IsRented == false)
+            {
+                throw new UnOccupiedScooterEndRentException(id);
+            }
             scooter.IsRented = false;
-            var toPay= FinancialRecords.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
+            var toPay= ChargeCalculator.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
             FinancialRecords.FinancialRecordRegister.Add(new FinancialRecord(id,endRentAt,toPay));
             return toPay;
         }
@@ -42,7 +50,7 @@ namespace ScooterRental
                 var scootersInUse = ScooterService.GetScootersInUse();
                 foreach (var scooter in scootersInUse)
                 {
-                    income += FinancialRecords.CalculateCharge(scooter.PricePerMinute, DateTime.UtcNow - scooter.RentedAt);
+                    income += ChargeCalculator.CalculateCharge(scooter.PricePerMinute, DateTime.UtcNow - scooter.RentedAt);
                 }
             }
             return income;

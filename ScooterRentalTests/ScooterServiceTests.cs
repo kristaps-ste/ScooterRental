@@ -1,4 +1,5 @@
-﻿using ScooterRental;
+﻿using System.Collections.Generic;
+using ScooterRental;
 using ScooterRental.Exceptions;
 using Xunit;
 
@@ -6,30 +7,34 @@ namespace ScooterRentalTests
 {
     public class ScooterServiceTests
     {
-        private ScooterService ScooterServiceInstance;
+        private IScooterService ScooterServiceInstance;
         public ScooterServiceTests()
         {
-            ScooterServiceInstance = new ScooterService();
+            var scooterList = new List<Scooter>(){new Scooter("1111", 0.5m)};
+            ScooterServiceInstance = new ScooterService(scooterList);
         }
 
         [Fact]
         public void ScooterServiceShouldContainInitializedList()
         {
-            Assert.NotNull(ScooterServiceInstance.GetScooters());
+            IScooterService localInstance = new ScooterService();
+            Assert.NotNull(localInstance.GetScooters());
         }
 
         [Fact]
         public void AddScooter_ShouldBeAbleToAddNewScooterToList()
         {
             var expectedCount = 1;
-            ScooterServiceInstance.AddScooter("11111",0.5m);
-            Assert.Equal(expectedCount,ScooterServiceInstance.GetScooters().Count);
+            IScooterService localInstance = new ScooterService();
+            localInstance.AddScooter("11111",0.5m);
+            Assert.Equal(expectedCount,localInstance.GetScooters().Count);
         }
         [Fact]
         public void AddScooter_ShouldThrowExceptionWhenDuplicateIdAdded()
         {
-            ScooterServiceInstance.AddScooter("11111",0.5m);
-            Assert.Throws<DuplicateScooterIdException>(() => ScooterServiceInstance.AddScooter("11111", 0.5m));
+            Scooter existingScooter = ScooterServiceInstance.GetScooters()[0];
+            Assert.Throws<DuplicateScooterIdException>(()
+                => ScooterServiceInstance.AddScooter(existingScooter.Id,existingScooter.PricePerMinute));
         }
 
         [Fact]
@@ -65,7 +70,7 @@ namespace ScooterRentalTests
         public void GetScooters_ShouldReturnUnrentedScooters()
         {
             int expectedValue = 1;
-
+            ScooterServiceInstance=new ScooterService();
             ScooterServiceInstance.AddScooter("1",0.5m);
             ScooterServiceInstance.AddScooter("2",0.5m);
             ScooterServiceInstance.GetScooterById("2").IsRented = true;
