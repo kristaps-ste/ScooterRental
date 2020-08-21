@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using FluentAssertions;
-using ScooterRental;
+﻿using ScooterRental;
 using ScooterRental.Exceptions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace ScooterRentalTests
 {

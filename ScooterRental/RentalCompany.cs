@@ -16,11 +16,11 @@ namespace ScooterRental
         }
         public void StartRent(string id)
         {
-            if (ScooterService.GetScooterById(id).IsRented)
+            var scooter = ScooterService.GetScooterById(id);
+            if (scooter.IsRented)
             {
                 throw new OccupiedScooterException(id);
             }
-            var scooter=ScooterService.GetScooterById(id);
             scooter.IsRented=true; 
             scooter.RentedAt=DateTime.UtcNow;
         }

@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace ScooterRental
 {
-    public class FinancialRecords
+    
+    public class FinancialRecords : IFinancialRecords
     {
         public IList<FinancialRecord> FinancialRecordRegister { get; }
 

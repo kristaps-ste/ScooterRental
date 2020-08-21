@@ -67,6 +67,7 @@
     <Compile Include="Exceptions\OccupiedScooterException.cs" />
     <Compile Include="FinancialRecord.cs" />
     <Compile Include="FinancialRecords.cs" />
+    <Compile Include="IFinancialRecords.cs" />
     <Compile Include="IRentalCompany.cs" />
     <Compile Include="IScooterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

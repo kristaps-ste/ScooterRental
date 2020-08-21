@@ -8,7 +8,7 @@ namespace ScooterRentalTests
     public class RentalCompanyTests
     {
         private string ExpectedName = "DemoCompany";
-        private RentalCompany RentalInstance;
+        private IRentalCompany RentalInstance;
 
         public RentalCompanyTests()
         {
