@@ -1,5 +1,6 @@
 using System;
 using ScooterRental;
+using ScooterRental.Exceptions;
 using Xunit;
 
 namespace ScooterRentalTests
@@ -42,7 +43,7 @@ namespace ScooterRentalTests
 
             RentalInstance.ScooterService.AddScooter(testId, 0.5m);
             RentalInstance.StartRent(testId);
-            Assert.Throws<ArgumentException>(() => RentalInstance.StartRent(testId));
+            Assert.Throws<OccupiedScooterException>(() => RentalInstance.StartRent(testId));
         }
 
         [Fact]

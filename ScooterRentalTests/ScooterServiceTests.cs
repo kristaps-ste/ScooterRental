@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using FluentAssertions;
 using ScooterRental;
+using ScooterRental.Exceptions;
 using Xunit;
 using Xunit.Sdk;
 
@@ -33,7 +35,7 @@ namespace ScooterRentalTests
         public void AddScooter_ShouldThrowExceptionWhenDuplicateIdAdded()
         {
             ScooterServiceInstance.AddScooter("11111",0.5m);
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.AddScooter("11111", 0.5m));
+            Assert.Throws<DuplicateScooterIdException>(() => ScooterServiceInstance.AddScooter("11111", 0.5m));
         }
 
         [Fact]
@@ -52,7 +54,7 @@ namespace ScooterRentalTests
             string testId = "2";
             ScooterServiceInstance.AddScooter(scooterId,0.5m);
 
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.GetScooterById(testId));
+            Assert.Throws<InvalidScooterIdException>(() => ScooterServiceInstance.GetScooterById(testId));
         }
         [Fact]
         public void RemoveScooter_ShouldRemoveCorrectScooterFromListByIdOrThrowException()
@@ -62,7 +64,7 @@ namespace ScooterRentalTests
             ScooterServiceInstance.AddScooter(testId,0.5m);
             ScooterServiceInstance.RemoveScooter(testId);
 
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.RemoveScooter(testId));
+            Assert.Throws<InvalidScooterIdException>(() => ScooterServiceInstance.RemoveScooter(testId));
         }
 
         [Fact]

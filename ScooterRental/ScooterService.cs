@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using ScooterRental.Exceptions;
 
 namespace ScooterRental
 {
@@ -16,20 +18,17 @@ namespace ScooterRental
         {
             if (IsScooterExistInList(id))
             {
-                throw new  ArgumentException($"Scooter with id: {id} already exists in list.","id");
+                throw new DuplicateScooterIdException(id);
             }
-
             ScooterList.Add(new Scooter(id,pricePerMinute));
-
         }
 
         public void RemoveScooter(string id)
         {
             if (!IsScooterExistInList(id))
             {
-                throw new  ArgumentException($"Scooter with id: {id} does not exist.","id");
+                throw new InvalidScooterIdException(id);
             }
-
             ScooterList = ScooterList.Where(it => it.Id != id).ToList();
         }
 
@@ -46,7 +45,7 @@ namespace ScooterRental
         {
             if (!IsScooterExistInList(scooterId))
             {
-                throw new  ArgumentException($"Scooter with id: {scooterId} does not exist.","scooterId");
+                throw new InvalidScooterIdException(scooterId);
             }
 
             return ScooterList.First(it => it.Id == scooterId);

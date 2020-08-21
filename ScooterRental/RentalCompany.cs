@@ -1,4 +1,5 @@
 ﻿using System;
+using ScooterRental.Exceptions;
 
 namespace ScooterRental
 {
@@ -17,9 +18,8 @@ namespace ScooterRental
         {
             if (ScooterService.GetScooterById(id).IsRented)
             {
-                throw new ArgumentException($"Scooter with id {id} is occupied already","id");
+                throw new OccupiedScooterException(id);
             }
-
             var scooter=ScooterService.GetScooterById(id);
             scooter.IsRented=true; 
             scooter.RentedAt=DateTime.UtcNow;
