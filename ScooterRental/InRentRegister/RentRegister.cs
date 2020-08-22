@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ScooterRental.Exceptions;
-using ScooterRental.InRentRegister;
 
-namespace ScooterRental
+namespace ScooterRental.InRentRegister
 {
     public class RentRegister : IRentRegister
     {
@@ -14,9 +13,9 @@ namespace ScooterRental
         {
         }
 
-        public RentRegister(IList<IRentRegisterRecord> reocrds)
+        public RentRegister(IList<IRentRegisterRecord> records)
         {
-            _scootersInRent = reocrds;
+            _scootersInRent = records;
         }
 
         public void RegisterScooterInRent(Scooter scooter)
@@ -27,7 +26,6 @@ namespace ScooterRental
             }
             _scootersInRent.Add(new RentRegisterRecord(scooter));
         }
-
         public TimeSpan ReturnScooter(Scooter scooter)
         {
 
@@ -47,11 +45,18 @@ namespace ScooterRental
             return _scootersInRent;
         }
 
+        public IList<IRentRegisterRecord> GetRecords(DateTime startedIn)
+        {
+            if (startedIn.Year==1)
+            {
+                return _scootersInRent;
+            }
+            return _scootersInRent.Where(it => it.RentStarTime.Year == startedIn.Year).ToList();
+        }
+
         private bool IsScooterInRent(string id)
         {
             return _scootersInRent.Any(it => it.Scooter.Id == id);
         }
-
     }
-
 }

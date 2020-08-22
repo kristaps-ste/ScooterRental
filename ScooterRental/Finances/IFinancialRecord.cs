@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ScooterRental
+namespace ScooterRental.Finances
 {
     public interface IFinancialRecord
     {

@@ -1,5 +1,6 @@
 ﻿using System;
 using ScooterRental;
+using ScooterRental.Finances;
 using Xunit;
 
 namespace ScooterRentalTests

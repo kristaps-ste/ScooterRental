@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Linq;
 using ScooterRental.Exceptions;
 
@@ -12,7 +10,7 @@ namespace ScooterRental
 
         public ScooterService()
         {
-            ScooterList=new List<Scooter>();
+            ScooterList = new List<Scooter>();
         }
 
         public ScooterService(IList<Scooter> scooterList)
@@ -25,9 +23,8 @@ namespace ScooterRental
             {
                 throw new DuplicateScooterIdException(id);
             }
-            ScooterList.Add(new Scooter(id,pricePerMinute));
+            ScooterList.Add(new Scooter(id, pricePerMinute));
         }
-
         public void RemoveScooter(string id)
         {
             if (!IsScooterExistInList(id))

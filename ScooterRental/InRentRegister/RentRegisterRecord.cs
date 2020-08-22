@@ -1,7 +1,5 @@
 ﻿using System;
-using ScooterRental.InRentRegister;
-
-namespace ScooterRental
+namespace ScooterRental.InRentRegister
 {
     public class RentRegisterRecord : IRentRegisterRecord
     {

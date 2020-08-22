@@ -2,6 +2,8 @@
 using System.Reflection;
 using Xunit;
 using ScooterRental;
+using ScooterRental.Finances;
+
 namespace ScooterRentalTests
 {
     public class FinancesTests

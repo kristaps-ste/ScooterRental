@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ScooterRental
+namespace ScooterRental.Finances
 {
     public class FinancialRecords : IFinancialRecords
     {
@@ -10,7 +9,7 @@ namespace ScooterRental
 
         public FinancialRecords()
         {
-            FinancialRecordRegister=new List<IFinancialRecord>();
+            FinancialRecordRegister = new List<IFinancialRecord>();
         }
 
         public void AddRecord(IFinancialRecord record)

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using ScooterRental.InRentRegister;
 
-namespace ScooterRental
+namespace ScooterRental.InRentRegister
 {
     public interface IRentRegister
     {
         void RegisterScooterInRent(Scooter scooter);
         TimeSpan ReturnScooter(Scooter scooter);
         IList<IRentRegisterRecord> GetRecords();
+        IList<IRentRegisterRecord> GetRecords(DateTime startedIn);
     }
 }

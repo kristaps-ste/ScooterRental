@@ -1,5 +1,7 @@
 ﻿using System;
 using ScooterRental.Exceptions;
+using ScooterRental.Finances;
+using ScooterRental.InRentRegister;
 
 namespace ScooterRental
 {
@@ -48,9 +50,11 @@ namespace ScooterRental
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
         {
             decimal income = FinancialRecords.CalculateIncome(year);
+
             if (includeNotCompletedRentals)
             {
-                var rentedList = RentalRecords.GetRecords();
+                int startedIn = year.HasValue  ? year.Value : 1;
+                var rentedList = RentalRecords.GetRecords(new DateTime(startedIn,1,1));
                 foreach (var record in rentedList)
                 {
                     income += ChargeCalculator.CalculateCharge(record.Scooter.PricePerMinute, DateTime.UtcNow - record.RentStarTime);
