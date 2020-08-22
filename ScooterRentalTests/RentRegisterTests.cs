@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using ScooterRental;
 using ScooterRental.Exceptions;
+using ScooterRental.InRentRegister;
 using Xunit;
 
 namespace ScooterRentalTests
@@ -40,8 +42,8 @@ namespace ScooterRentalTests
         public void ReturnScooter_ShouldReturnCorrectTimespan()
         {
             double expectedRentTimeHours = 1;
-            RentRegisterRecord r = new RentRegisterRecord(ScooterInstance, DateTime.UtcNow.AddHours(-expectedRentTimeHours));
-            var localInstance  = new RentRegister(r);
+            IRentRegisterRecord r = new RentRegisterRecord(ScooterInstance, DateTime.UtcNow.AddHours(-expectedRentTimeHours));
+            var localInstance  = new RentRegister(new List<IRentRegisterRecord>(){r});
             var timeSpent = localInstance.ReturnScooter(ScooterInstance);
             Assert.Equal(expectedRentTimeHours,timeSpent.Hours);
         }

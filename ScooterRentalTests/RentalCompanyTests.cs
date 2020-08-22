@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using ScooterRental;
 using ScooterRental.Exceptions;
+using ScooterRental.InRentRegister;
 using Xunit;
 
 namespace ScooterRentalTests
@@ -62,8 +64,8 @@ namespace ScooterRentalTests
             Scooter scooter = _scooterService.GetScooterById(_testIdScooter);
             scooter.IsRented = true;
            
-            RentRegisterRecord record =new RentRegisterRecord(scooter,startTime);
-            _rentRegister=new RentRegister(record);
+            IRentRegisterRecord record =new RentRegisterRecord(scooter,startTime);
+            _rentRegister=new RentRegister(new List<IRentRegisterRecord>(){record});
             _rentalInstance = SetUpCompanyInstance();
 
             var result=_rentalInstance.EndRent(_testIdScooter);
@@ -81,6 +83,10 @@ namespace ScooterRentalTests
             _financialRecords.AddRecord(new FinancialRecord(_testIdScooter, new DateTime(2000,6,1),6));
             _financialRecords.AddRecord(new FinancialRecord(_testIdScooter, new DateTime(2005,1,1),6));
 
+            //_rentRegister=new RentRegister(new RentRegisterRecord());
+            
+
+            
             _rentalInstance = SetUpCompanyInstance();
 
             var result = _rentalInstance.CalculateIncome(year, includeUncompleted);

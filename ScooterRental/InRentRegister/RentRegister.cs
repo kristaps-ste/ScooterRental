@@ -14,9 +14,9 @@ namespace ScooterRental
         {
         }
 
-        public RentRegister(RentRegisterRecord record)
+        public RentRegister(IList<IRentRegisterRecord> reocrds)
         {
-            _scootersInRent.Add(record);
+            _scootersInRent = reocrds;
         }
 
         public void RegisterScooterInRent(Scooter scooter)
