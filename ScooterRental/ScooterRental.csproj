@@ -75,13 +75,13 @@
     <Compile Include="Finances\IFinancialRecords.cs" />
     <Compile Include="InRentRegister\IRentRegister.cs" />
     <Compile Include="IRentalCompany.cs" />
-    <Compile Include="IScooterService.cs" />
+    <Compile Include="ScooterService\IScooterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RentalCompany.cs" />
     <Compile Include="InRentRegister\RentRegister.cs" />
     <Compile Include="InRentRegister\RentRegisterRecord.cs" />
-    <Compile Include="Scooter.cs" />
-    <Compile Include="ScooterService.cs" />
+    <Compile Include="ScooterService\Scooter.cs" />
+    <Compile Include="ScooterService\ScooterService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

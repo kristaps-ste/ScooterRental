@@ -11,14 +11,14 @@ namespace ScooterRental
         private IRentRegister RentalRecords { get; }
         private IChargeCalculator ChargeCalculator { get; }
 
-        public RentalCompany(string name, IScooterService scooterService,
-            IFinancialRecords finRecords,IRentRegister records, IChargeCalculator chargeClc)
+        public RentalCompany(string name, IScooterService scooterService, IFinancialRecords financialRecords, 
+            IRentRegister rentalRecords, IChargeCalculator chargeCalculator)
         {
             Name = name;
             ScooterService = scooterService;
-            FinancialRecords = finRecords;
-            RentalRecords = records;
-            ChargeCalculator = chargeClc;
+            FinancialRecords = financialRecords;
+            RentalRecords = rentalRecords;
+            ChargeCalculator = chargeCalculator;
         }
         public void StartRent(string id)
         {
