@@ -30,10 +30,6 @@ namespace ScooterRental
         /// <param name="scooterId">Unique ID of the scooter.</param>
         /// <returns>Return a particular scooter.</returns>
         Scooter GetScooterById(string scooterId);
-        /// <summary>
-        /// List of scooters that is rented out at the moment
-        /// </summary>
-        /// <returns></returns>
-        IList<Scooter> GetScootersInUse();
+        
     }
 }

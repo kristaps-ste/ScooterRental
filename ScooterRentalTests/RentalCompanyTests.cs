@@ -17,8 +17,9 @@ namespace ScooterRentalTests
             IScooterService scooterService = new ScooterService();
             scooterService.AddScooter(_testIdScooter,0.5m);
             IFinancialRecords financialRecords= new FinancialRecords();
+            IRentRegister rentRegister=new RentRegister();
             IChargeCalculator chrgCalc= new ChargeCalculator();
-            RentalInstance = new RentalCompany(ExpectedName,scooterService, financialRecords,chrgCalc);
+            RentalInstance = new RentalCompany(ExpectedName,scooterService, financialRecords,rentRegister,chrgCalc);
         }
         [Fact]
         public void RentalCompanyInstanceInitializationWithCorrectName()

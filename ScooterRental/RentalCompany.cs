@@ -8,13 +8,16 @@ namespace ScooterRental
         public string Name { get; }
         private IScooterService ScooterService { get; }
         private IFinancialRecords FinancialRecords { get; }
+        private IRentRegister RentalRecords { get; }
         private IChargeCalculator ChargeCalculator { get; }
 
-        public RentalCompany(string name, IScooterService scooterService, IFinancialRecords finRecords, IChargeCalculator chargeClc)
+        public RentalCompany(string name, IScooterService scooterService,
+            IFinancialRecords finRecords,IRentRegister records, IChargeCalculator chargeClc)
         {
             Name = name;
             ScooterService = scooterService;
             FinancialRecords = finRecords;
+            RentalRecords = records;
             ChargeCalculator = chargeClc;
         }
         public void StartRent(string id)
@@ -25,21 +28,21 @@ namespace ScooterRental
                 throw new OccupiedScooterException(id);
             }
             scooter.IsRented=true; 
-            scooter.RentedAt=DateTime.UtcNow;
+            RentalRecords.RegisterScooterInRent(scooter);
         }
 
         public decimal EndRent(string id)
         {
-            var endRentAt = DateTime.UtcNow;
-
             var scooter = ScooterService.GetScooterById(id);
             if (scooter.IsRented == false)
             {
                 throw new UnOccupiedScooterEndRentException(id);
             }
+            
+            var rentTime=RentalRecords.ReturnScooter(scooter);
             scooter.IsRented = false;
-            var toPay= ChargeCalculator.CalculateCharge(scooter.PricePerMinute, endRentAt - scooter.RentedAt);
-            FinancialRecords.FinancialRecordRegister.Add(new FinancialRecord(id,endRentAt,toPay));
+            var toPay= ChargeCalculator.CalculateCharge(scooter.PricePerMinute, rentTime);
+            FinancialRecords.FinancialRecordRegister.Add(new FinancialRecord(id,DateTime.UtcNow, toPay));
             return toPay;
         }
         public decimal CalculateIncome(int? year, bool includeNotCompletedRentals)
@@ -47,10 +50,10 @@ namespace ScooterRental
             decimal income = FinancialRecords.CalculateIncome(year);
             if (includeNotCompletedRentals)
             {
-                var scootersInUse = ScooterService.GetScootersInUse();
-                foreach (var scooter in scootersInUse)
+                var rentedList = RentalRecords.GetRecords();
+                foreach (var record in rentedList)
                 {
-                    income += ChargeCalculator.CalculateCharge(scooter.PricePerMinute, DateTime.UtcNow - scooter.RentedAt);
+                    income += ChargeCalculator.CalculateCharge(record.Scooter.PricePerMinute, DateTime.UtcNow - record.RentStarTime);
                 }
             }
             return income;
