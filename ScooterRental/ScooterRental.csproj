@@ -72,8 +72,10 @@
     <Compile Include="Finances\FinancialRecord.cs" />
     <Compile Include="Finances\FinancialRecords.cs" />
     <Compile Include="Finances\IChargeCalculator.cs" />
+    <Compile Include="Finances\IFinancialRecord.cs" />
     <Compile Include="Finances\IFinancialRecords.cs" />
     <Compile Include="InRentRegister\IRentRegister.cs" />
+    <Compile Include="InRentRegister\IRentRegisterRecord.cs" />
     <Compile Include="IRentalCompany.cs" />
     <Compile Include="ScooterService\IScooterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

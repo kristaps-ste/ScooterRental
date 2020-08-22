@@ -2,7 +2,7 @@
 
 namespace ScooterRental
 {
-    public class FinancialRecord
+    public class FinancialRecord : IFinancialRecord
     {
         public string   ScooterId { get; }
         public DateTime DateTime { get; }

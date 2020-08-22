@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ScooterRental
 {
     public interface IFinancialRecords
     {
-        IList<FinancialRecord> FinancialRecordRegister { get; }
-        void AddRecord(FinancialRecord record);
+        IList<IFinancialRecord> FinancialRecordRegister { get; }
+        void AddRecord(IFinancialRecord record);
         decimal CalculateIncome(int? year);
     }
 }

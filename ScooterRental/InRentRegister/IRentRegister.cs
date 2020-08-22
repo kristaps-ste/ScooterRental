@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ScooterRental.InRentRegister;
 
 namespace ScooterRental
 {
@@ -7,6 +8,6 @@ namespace ScooterRental
     {
         void RegisterScooterInRent(Scooter scooter);
         TimeSpan ReturnScooter(Scooter scooter);
-        IList<RentRegisterRecord> GetRecords();
+        IList<IRentRegisterRecord> GetRecords();
     }
 }

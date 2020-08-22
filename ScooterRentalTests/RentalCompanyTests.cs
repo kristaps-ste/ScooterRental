@@ -72,11 +72,20 @@ namespace ScooterRentalTests
 
         [Theory]
 
-        [InlineData(2000,false,0)]
+        [InlineData(2000,false,7)]
+        [InlineData(null,false,13)]
         public void CalculateIncome_ShouldCalculateIncomeAsRequested(int ? year, bool includeUncompleted, decimal expected)
         {
+            _financialRecords=new FinancialRecords();
+            _financialRecords.AddRecord(new FinancialRecord(_testIdScooter, new DateTime(2000,1,1),1));
+            _financialRecords.AddRecord(new FinancialRecord(_testIdScooter, new DateTime(2000,6,1),6));
+            _financialRecords.AddRecord(new FinancialRecord(_testIdScooter, new DateTime(2005,1,1),6));
 
+            _rentalInstance = SetUpCompanyInstance();
 
+            var result = _rentalInstance.CalculateIncome(year, includeUncompleted);
+            
+            Assert.Equal(expected,result);
         }
     }
 }

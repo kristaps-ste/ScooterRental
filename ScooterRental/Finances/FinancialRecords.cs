@@ -6,14 +6,14 @@ namespace ScooterRental
 {
     public class FinancialRecords : IFinancialRecords
     {
-        public IList<FinancialRecord> FinancialRecordRegister { get; }
+        public IList<IFinancialRecord> FinancialRecordRegister { get; }
 
         public FinancialRecords()
         {
-            FinancialRecordRegister=new List<FinancialRecord>();
+            FinancialRecordRegister=new List<IFinancialRecord>();
         }
 
-        public void AddRecord(FinancialRecord record)
+        public void AddRecord(IFinancialRecord record)
         {
             FinancialRecordRegister.Add(record);
         }

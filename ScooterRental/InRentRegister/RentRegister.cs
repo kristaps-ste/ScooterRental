@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ScooterRental.Exceptions;
+using ScooterRental.InRentRegister;
 
 namespace ScooterRental
 {
     public class RentRegister : IRentRegister
     {
-        private IList<RentRegisterRecord> _scootersInRent = new List<RentRegisterRecord>();
+        private IList<IRentRegisterRecord> _scootersInRent = new List<IRentRegisterRecord>();
 
         public RentRegister()
         {
@@ -37,13 +36,13 @@ namespace ScooterRental
                 throw new UnRegisterScooterException(scooter.Id);
             }
 
-            RentRegisterRecord record = _scootersInRent.First(it => it.Scooter.Id == scooter.Id);
+            IRentRegisterRecord record = _scootersInRent.First(it => it.Scooter.Id == scooter.Id);
             TimeSpan duration = DateTime.UtcNow - record.RentStarTime;
             _scootersInRent.Remove(record);
             return duration;
         }
 
-        public IList<RentRegisterRecord> GetRecords()
+        public IList<IRentRegisterRecord> GetRecords()
         {
             return _scootersInRent;
         }

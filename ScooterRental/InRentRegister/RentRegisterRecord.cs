@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ScooterRental.InRentRegister;
 
 namespace ScooterRental
 {
-    public class RentRegisterRecord
+    public class RentRegisterRecord : IRentRegisterRecord
     {
         public Scooter Scooter { get; }
         public  DateTime RentStarTime { get; }
