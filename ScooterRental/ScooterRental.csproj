@@ -7,7 +7,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{A7E64844-5700-4F6C-99DA-42FB4549C779}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <RootNamespace>ScooterRental</RootNamespace>
     <AssemblyName>ScooterRental</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -59,8 +62,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Exceptions\DuplicateScooterIdException.cs" />
+    <Compile Include="Exceptions\InvalidScooterIdException.cs" />
+    <Compile Include="Exceptions\OccupiedScooterException.cs" />
+    <Compile Include="Exceptions\RegisterScooterInRentException.cs" />
+    <Compile Include="Exceptions\UnOccupiedScooterEndRentException.cs" />
+    <Compile Include="Exceptions\UnRegisterScooterException.cs" />
+    <Compile Include="Finances\ChargeCalculator.cs" />
+    <Compile Include="Finances\FinancialRecord.cs" />
+    <Compile Include="Finances\FinancialRecords.cs" />
+    <Compile Include="Finances\IChargeCalculator.cs" />
+    <Compile Include="Finances\IFinancialRecord.cs" />
+    <Compile Include="Finances\IFinancialRecords.cs" />
+    <Compile Include="InRentRegister\IRentRegister.cs" />
+    <Compile Include="InRentRegister\IRentRegisterRecord.cs" />
+    <Compile Include="IRentalCompany.cs" />
+    <Compile Include="ScooterService\IScooterService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RentalCompany.cs" />
+    <Compile Include="InRentRegister\RentRegister.cs" />
+    <Compile Include="InRentRegister\RentRegisterRecord.cs" />
+    <Compile Include="ScooterService\Scooter.cs" />
+    <Compile Include="ScooterService\ScooterService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -69,6 +92,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
