@@ -1,39 +1,40 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using FluentAssertions;
+﻿using System.Collections.Generic;
 using ScooterRental;
+using ScooterRental.Exceptions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace ScooterRentalTests
 {
     public class ScooterServiceTests
     {
-        private ScooterService ScooterServiceInstance;
+        private IScooterService ScooterServiceInstance;
         public ScooterServiceTests()
         {
-            ScooterServiceInstance = new ScooterService();
+            var scooterList = new List<Scooter>(){new Scooter("1111", 0.5m)};
+            ScooterServiceInstance = new ScooterService(scooterList);
         }
 
         [Fact]
         public void ScooterServiceShouldContainInitializedList()
         {
-            Assert.NotNull(ScooterServiceInstance.GetScooters());
+            IScooterService localInstance = new ScooterService();
+            Assert.NotNull(localInstance.GetScooters());
         }
 
         [Fact]
         public void AddScooter_ShouldBeAbleToAddNewScooterToList()
         {
             var expectedCount = 1;
-            ScooterServiceInstance.AddScooter("11111",0.5m);
-            Assert.Equal(expectedCount,ScooterServiceInstance.GetScooters().Count);
+            IScooterService localInstance = new ScooterService();
+            localInstance.AddScooter("11111",0.5m);
+            Assert.Equal(expectedCount,localInstance.GetScooters().Count);
         }
         [Fact]
         public void AddScooter_ShouldThrowExceptionWhenDuplicateIdAdded()
         {
-            ScooterServiceInstance.AddScooter("11111",0.5m);
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.AddScooter("11111", 0.5m));
+            Scooter existingScooter = ScooterServiceInstance.GetScooters()[0];
+            Assert.Throws<DuplicateScooterIdException>(()
+                => ScooterServiceInstance.AddScooter(existingScooter.Id,existingScooter.PricePerMinute));
         }
 
         [Fact]
@@ -52,7 +53,7 @@ namespace ScooterRentalTests
             string testId = "2";
             ScooterServiceInstance.AddScooter(scooterId,0.5m);
 
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.GetScooterById(testId));
+            Assert.Throws<InvalidScooterIdException>(() => ScooterServiceInstance.GetScooterById(testId));
         }
         [Fact]
         public void RemoveScooter_ShouldRemoveCorrectScooterFromListByIdOrThrowException()
@@ -62,20 +63,7 @@ namespace ScooterRentalTests
             ScooterServiceInstance.AddScooter(testId,0.5m);
             ScooterServiceInstance.RemoveScooter(testId);
 
-            Assert.Throws<ArgumentException>(() => ScooterServiceInstance.RemoveScooter(testId));
+            Assert.Throws<InvalidScooterIdException>(() => ScooterServiceInstance.RemoveScooter(testId));
         }
-
-        [Fact]
-        public void GetScooters_ShouldReturnUnrentedScooters()
-        {
-            int expectedValue = 1;
-
-            ScooterServiceInstance.AddScooter("1",0.5m);
-            ScooterServiceInstance.AddScooter("2",0.5m);
-            ScooterServiceInstance.GetScooterById("2").IsRented = true;
-            
-            Assert.Equal(expectedValue, ScooterServiceInstance.GetScooters().Count);
-        }
-
     }
 }

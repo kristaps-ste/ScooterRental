@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ScooterRental
 {
@@ -30,5 +26,6 @@ namespace ScooterRental
         /// <param name="scooterId">Unique ID of the scooter.</param>
         /// <returns>Return a particular scooter.</returns>
         Scooter GetScooterById(string scooterId);
+        
     }
 }

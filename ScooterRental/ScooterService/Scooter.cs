@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ScooterRental
+﻿namespace ScooterRental
 {
     public class Scooter
     {
@@ -26,10 +24,5 @@ namespace ScooterRental
         /// Identify if someone is renting this scooter.
         /// </summary>
         public bool IsRented { get; set; }
-
-        /// <summary>
-        /// Save time when rent started for charge later calculation.
-        /// </summary>
-        public DateTime RentedAt { get; set; }
     }
 }
